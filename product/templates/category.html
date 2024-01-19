@@ -11,33 +11,67 @@
 <body>
 
 <ul class="list-group">
+    {% for i in category_obj %}
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left"
-             viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-                  d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
-        </svg>
-        <a href="" class="text-decoration-none h4">A first list item</a>
-        <span class="badge bg-primary rounded-pill"></span>
+        <a href="" class="text-decoration-none h4">{{ i.name }}</a>
+        <span class="badge bg-primary rounded-pill" style="background-color: #6f94c6">
+                <a href="{% url 'product:category_detail' i.slug %}" style="background-color: #6f94c6">
+                    <span class="badge bg-primary rounded-pill" style="background-color: #6f94c6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-chevron-right" viewBox="0 0 16 16" style="background-color: #6f94c6">
+                          <path fill-rule="evenodd"
+                                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                        </svg>
+                    </span>
+                </a>
+            </span>
     </li>
+    {% endfor %}
+    {% for i in father_tree %}
+
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left"
-             viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-                  d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
-        </svg>
-        <a href="" class="text-decoration-none h4">A first list item</a>
-        <span class="badge bg-primary rounded-pill">2</span>
+        <a href="{% url 'product:category' %}" class="text-decoration-none h4">{{ i.name }} father</a>
+        <span class="badge bg-primary rounded-pill" style="background-color: #6f94c6">
+                    {% if i.parent %}
+                    <a href="{% url 'product:category_detail' i.parent.slug %}" style="background-color: #6f94c6">
+                    {% else %}
+                        <a href="{% url 'product:category' %}" style="background-color: #6f94c6">
+                        {% endif %}
+                        <span class="badge bg-primary rounded-pill" style="background-color: #6f94c6">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-chevron-down" viewBox="0 0 16 16" style="background-color: #6f94c6">
+                              <path fill-rule="evenodd"
+                                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                            </svg>
+                        </span>
+                    </a>
+                </span>
     </li>
+
+
+    {% endfor %}
+    {% for i in children %}
+    {% if i.children.all %}
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left"
-             viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-                  d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
-        </svg>
-        <a href="" class="text-decoration-none h4">A first list item</a>
-        <span class="badge bg-primary rounded-pill">1</span>
+        <a href="{% url 'product:category_detail' i.slug %}" class="text-decoration-none h4">{{ i.name }}</a>
+        <span class="badge bg-primary rounded-pill" style="background-color: #6f94c6">
+                    <a href="{% url 'product:category_detail' i.slug %}" style="background-color: #6f94c6">
+                        <span class="badge bg-primary rounded-pill" style="background-color: #6f94c6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-chevron-right" viewBox="0 0 16 16" style="background-color: #6f94c6">
+                              <path fill-rule="evenodd"
+                                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                            </svg>
+                        </span>
+                    </a>
+                </span>
     </li>
+    {% else %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="{% url 'product:product_list' i.slug %}" class="text-decoration-none h4">{{ i.name }}</a>
+    </li>
+    {% endif %}
+    {% endfor %}
 </ul>
 
 

@@ -16,6 +16,7 @@ media
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.idea
 
 # AWS User-specific
 .idea/**/aws.xml
@@ -24,6 +25,7 @@ media
 .idea/**/contentModel.xml
 
 # Sensitive or high-churn files
+.idea/
 .idea/**/dataSources/
 .idea/**/dataSources.ids
 .idea/**/dataSources.local.xml
