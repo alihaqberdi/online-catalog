@@ -1,8 +1,7 @@
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render
 
 from product.models import Category, Product
-
-# Create your views here.
 
 
 def category_main(request):
@@ -22,5 +21,22 @@ def category_detail(request, slug):
 
 def product_list(request, slug):
     product_obj = Product.objects.filter(category__slug=slug)
-    context = {"product_obj": product_obj}
+    items_per_page = 12
+    paginator = Paginator(product_obj, items_per_page)
+    page = request.GET.get("page", 1)
+
+    try:
+        obj_list = paginator.page(page)
+    except PageNotAnInteger:
+        obj_list = paginator.page(1)
+    except EmptyPage:
+        obj_list = paginator.page(paginator.num_pages)
+    category_list = Category.objects.all()
+    context = {"product_obj": obj_list, "category_list": category_list}
     return render(request, "product-list.html", context)
+
+
+def product_detail(request, slug):
+    product_obj = Product.objects.get(slug=slug)
+    context = {"product_obj": product_obj}
+    return render(request, "product-detail.html", context)

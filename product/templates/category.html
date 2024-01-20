@@ -1,19 +1,16 @@
-<!DOCTYPE html>
-<html>
+{% extends "category_base.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+{% endblock %}
 
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-
-<body>
-
+{% block content %}
 <ul class="list-group">
     {% for i in category_obj %}
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <a href="" class="text-decoration-none h4">{{ i.name }}</a>
+        <a href="{% url 'product:product_list' i.slug %}" class="text-decoration-none h4">{{ i.name }}</a>
         <span class="badge bg-primary rounded-pill" style="background-color: #6f94c6">
                 <a href="{% url 'product:category_detail' i.slug %}" style="background-color: #6f94c6">
                     <span class="badge bg-primary rounded-pill" style="background-color: #6f94c6">
@@ -30,22 +27,22 @@
     {% for i in father_tree %}
 
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <a href="{% url 'product:category' %}" class="text-decoration-none h4">{{ i.name }} father</a>
+        <a href="{% url 'product:product_list' i.slug %}" class="text-decoration-none h4">{{ i.name }}</a>
         <span class="badge bg-primary rounded-pill" style="background-color: #6f94c6">
-                    {% if i.parent %}
-                    <a href="{% url 'product:category_detail' i.parent.slug %}" style="background-color: #6f94c6">
-                    {% else %}
-                        <a href="{% url 'product:category' %}" style="background-color: #6f94c6">
-                        {% endif %}
-                        <span class="badge bg-primary rounded-pill" style="background-color: #6f94c6">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-chevron-down" viewBox="0 0 16 16" style="background-color: #6f94c6">
-                              <path fill-rule="evenodd"
-                                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
-                            </svg>
-                        </span>
-                    </a>
+            {% if i.parent %}
+            <a href="{% url 'product:category_detail' i.parent.slug %}" style="background-color: #6f94c6">
+            {% else %}
+            <a href="{% url 'product:category' %}" style="background-color: #6f94c6">
+            {% endif %}
+                <span class="badge bg-primary rounded-pill" style="background-color: #6f94c6">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-chevron-down" viewBox="0 0 16 16" style="background-color: #6f94c6">
+                      <path fill-rule="evenodd"
+                            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                    </svg>
                 </span>
+            </a>
+        </span>
     </li>
 
 
@@ -53,7 +50,7 @@
     {% for i in children %}
     {% if i.children.all %}
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <a href="{% url 'product:category_detail' i.slug %}" class="text-decoration-none h4">{{ i.name }}</a>
+        <a href="{% url 'product:product_list' i.slug %}" class="text-decoration-none h4">{{ i.name }}</a>
         <span class="badge bg-primary rounded-pill" style="background-color: #6f94c6">
                     <a href="{% url 'product:category_detail' i.slug %}" style="background-color: #6f94c6">
                         <span class="badge bg-primary rounded-pill" style="background-color: #6f94c6">
@@ -73,8 +70,6 @@
     {% endif %}
     {% endfor %}
 </ul>
+{% endblock %}
 
 
-</body>
-
-</html>
