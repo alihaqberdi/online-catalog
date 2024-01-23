@@ -18,11 +18,17 @@ class CategoryAdmin(admin.ModelAdmin):
     autocomplete_fields = ["parent"]
 
 
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+    extra = 1
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ["name", "slug", "image", "price"]
     list_display_links = ["name", "slug", "price"]
     list_filter = ["name"]
     search_fields = ["name", "category"]
+    inlines = [ProductImageInline]
     prepopulated_fields = {"slug": ("name",)}
     autocomplete_fields = ["category"]
