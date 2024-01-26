@@ -11,6 +11,7 @@ class Category(BaseModel):
     parent = models.ForeignKey(
         "self", null=True, blank=True, on_delete=models.SET_NULL, related_name="children", verbose_name=_("Parent")
     )
+    product_count = models.PositiveIntegerField(default=0, verbose_name=_("Product Count"))
 
     def get_ancestors(self, include_self=False):
         ancestors = []
@@ -37,6 +38,7 @@ class Product(BaseModel):
     image = models.ImageField(upload_to="product", verbose_name=_("Image"))
     description = models.TextField(verbose_name=_("Description"))
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Price"))
+    see_count = models.PositiveIntegerField(default=0, verbose_name=_("See Count"))
 
     def __str__(self):
         return self.name
@@ -48,3 +50,20 @@ class ProductImage(BaseModel):
 
     def __str__(self):
         return self.product.name
+
+
+class Collection(BaseModel):
+    name = models.CharField(max_length=255, verbose_name=_("Name"))
+    slug = models.SlugField(max_length=255, unique=True, verbose_name=_("Slug"))
+    product = models.ManyToManyField(Product, verbose_name=_("Product"))
+
+    def __str__(self):
+        return self.name
+
+
+class TopCategory(BaseModel):
+    name = models.CharField(max_length=255, verbose_name=_("Name"))
+    category = models.ManyToManyField(Category, verbose_name=_("Category"))
+
+    def __str__(self):
+        return self.name

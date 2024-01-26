@@ -1,10 +1,17 @@
 from django.contrib import admin
 
-from product.models import Category, Product, ProductImage
+from product.models import (Category, Collection, Product, ProductImage,
+                            TopCategory)
 
 # Register your models here.
 
-admin.site.register([ProductImage])
+admin.site.register([ProductImage, TopCategory])
+
+
+@admin.register(Collection)
+class CollectionAdmin(admin.ModelAdmin):
+    list_display = ["name", "slug"]
+    prepopulated_fields = {"slug": ("name",)}
 
 
 @admin.register(Category)

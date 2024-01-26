@@ -6,4 +6,5 @@ app_name = "common"
 
 urlpatterns = [
     path("", views.main_page, name="main_page"),
+    path("search/", views.search, name="search"),
 ]

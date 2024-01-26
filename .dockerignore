@@ -21,4 +21,3 @@ Dockerfile
 .mypy_cache
 .pytest_cache
 .htmlcov
-

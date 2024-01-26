@@ -14,7 +14,7 @@
     <meta name="author" content="Alijon">
 
     <!-- site Favicon -->
-    <link rel="icon" href="{% static 'assets/images/favicon/favicon.png' %}" sizes="32x32"/>
+    <link rel="icon" href="{% static 'custom/icon/img.png' %}" sizes="32x32"/>
     <link rel="apple-touch-icon" href="{% static 'assets/images/favicon/favicon.png' %}"/>
     <meta name="msapplication-TileImage" content="{% static 'assets/images/favicon/favicon.png' %}"/>
 
@@ -123,13 +123,13 @@
                         <!-- Header Cart Start -->
                         <a href="" class="ec-header-btn ec-header-wishlist">
                             <div class="header-icon"><i class="fi-rr-heart"></i></div>
-<!--                            <span class="ec-header-count">3</span>-->
+                            <!--                            <span class="ec-header-count">3</span>-->
                         </a>
                         <!-- Header Cart End -->
                         <!-- Header Cart Start -->
                         <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
                             <div class="header-icon"><i class="fi-rr-shopping-bag"></i></div>
-<!--                            <span class="ec-header-count cart-count-lable">3</span>-->
+                            <!--                            <span class="ec-header-count cart-count-lable">3</span>-->
                         </a>
                         <!-- Header Cart End -->
                         <a href="" class="">
@@ -163,9 +163,9 @@
                     <!-- Ec Header Search Start -->
                     <div class="align-self-center">
                         <div class="header-search">
-                            <form class="ec-btn-group-form" action="#">
+                            <form class="ec-btn-group-form" action="{% url 'common:search' %}">
                                 <input class="form-control ec-search-bar" placeholder="Search products..."
-                                       type="text">
+                                       type="text" name="q" value="{{ q }}">
                                 <button class="submit" type="submit"><i class="fi-rr-search"></i></button>
                             </form>
                         </div>
@@ -311,7 +311,8 @@
             <div class="ec-nav-panel-icons">
                 <a href="" class="toggle-cart ec-header-btn ec-side-toggle"><i
                         class="fi-rr-shopping-bag"></i>
-<!--                        <spanclass="ec-cart-noti ec-header-count cart-count-lable">3</span>--></a>
+                    <!--                        <spanclass="ec-cart-noti ec-header-count cart-count-lable">3</span>-->
+                </a>
             </div>
         </div>
     </div>
