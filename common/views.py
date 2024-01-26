@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from product.models import Category, Collection, Product
+from product.models import Category, Collection, Product, TopCategory
 
 
 def main_page(request):
@@ -8,9 +8,13 @@ def main_page(request):
     all_collection_product = Product.objects.filter(id__in=collection.values_list("product", flat=True))
     if len(all_collection_product) > 12:
         all_collection_product = all_collection_product[:12]
+    category = TopCategory.objects.first()
+
     context = {
         "collection": collection,
         "all_collection_product": all_collection_product,
+        "category": category.category.all()[1:] if category else None,
+        "default_category": category.category.first() if category else None,
     }
     return render(request, "index.html", context)
 

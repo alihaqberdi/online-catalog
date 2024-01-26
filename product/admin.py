@@ -5,7 +5,13 @@ from product.models import (Category, Collection, Product, ProductImage,
 
 # Register your models here.
 
-admin.site.register([ProductImage, TopCategory])
+admin.site.register([ProductImage])
+
+
+@admin.register(TopCategory)
+class TopCategoryAdmin(admin.ModelAdmin):
+    list_display = ["name", "slug", "image"]
+    prepopulated_fields = {"slug": ("name",)}
 
 
 @admin.register(Collection)
