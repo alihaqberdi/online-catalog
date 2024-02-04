@@ -1,14 +1,20 @@
 {% extends "base.html" %}
 {% load static %}
 {% block css %}
-    <style>
-        @media screen and (max-width: 768px) {
-            .media_screen_container {
-                display: none;
-            }
-            
+<style>
+    @media screen and (max-width: 768px) {
+        .media_screen_container {
+            display: none;
         }
-    </style>
+
+    }
+
+    @media screen and (min-width: 768px) {
+        .media_class {
+            display: none;
+        }
+    }
+</style>
 {% endblock %}
 {% block content %}
 
@@ -47,7 +53,7 @@
 <div class="container media_screen_container">
     <div class="row">
         <div class="col-md-3">
-        <div class="scroll-container" style="width: 250px;
+            <div class="scroll-container" style="width: 250px;
                 height: 300px;
                 overflow: auto;
                 margin-left: 5%;">
@@ -56,13 +62,13 @@
                     <a><h5 class="ec-pro-title">{{ i.name }}</h5></a>
                     {% endfor %}
                 </div>
-        </div>
+            </div>
         </div>
         <div class="col-md-9">
             <div class="container">
                 <div class="row">
-            {% for i in obj_list %}
-            <div class="col-lg-4 col-md-6">
+                    {% for i in obj_list %}
+                        <div class="col-lg-4 col-md-6">
                                 <div class="ec-product-inner">
                                     <div class="ec-pro-image-outer">
                                         <div class="ec-pro-image">
@@ -87,7 +93,7 @@
                                     </div>
                                 </div>
                             </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-6 pro-gl-content">
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-6 pro-gl-content">
                                 <div class="ec-product-inner">
                                     <div class="ec-pro-image-outer">
                                         <div class="ec-pro-image">
@@ -108,12 +114,10 @@
 <!--                                                <span class="old-price">$27.00</span>-->
                                                 <span class="new-price">{{ i.price }} сум</span>
                                             </span>
-
                                     </div>
                                 </div>
                             </div>
-
-            {% endfor %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -308,14 +312,15 @@
                         </span>
                     </div>
                     {% for i in category %}
-                        <div class="tab-pane fade" id="{{ i.slug }}">
-                            <div class="row">
-                                <img src="{{ i.image.url }}" alt=""/>
-                            </div>
-                            <span class="panel-overlay">
-                                    <a href="{% url 'product:product_list' i.slug %}" class="btn btn-primary">View All</a>
-                            </span>
+                    <div class="tab-pane fade" id="{{ i.slug }}">
+                        <div class="row">
+                            <img src="{{ i.image.url }}" alt=""/>
                         </div>
+                        <span class="panel-overlay">
+                                    <a href="{% url 'product:product_list' i.slug %}"
+                                       class="btn btn-primary">View All</a>
+                            </span>
+                    </div>
                     {% endfor %}
                 </div>
                 <!-- Category Tab End -->
@@ -379,5 +384,84 @@
     </div>
 </section>
 <!--services Section End -->
+
+<section class="ec-page-content-bnr section-space-pb media_class">
+    <div class="container">
+        <div class="row">
+            <div class="ec-shop-rightside col-lg-12 order-lg-last col-md-12 order-md-first margin-b-30">
+                <!-- Shop Top Start -->
+                <div class="ec-pro-list-top d-flex">
+                    <div class="col-md-6 ec-grid-list">
+                        <div class="ec-gl-btn">
+                            <button class="btn btn-grid active"><i class="fi-rr-apps"></i></button>
+                            <button class="btn btn-list"><i class="fi-rr-list"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-md-6 ec-sort-select">
+                        <span class="sort-by">Sort by</span>
+                        <div class="ec-select-inner">
+                            <select name="ec-select" id="ec-select">
+                                <option selected disabled>Position</option>
+                                <option value="1">Relevance</option>
+                                <option value="2">Name, A to Z</option>
+                                <option value="3">Name, Z to A</option>
+                                <option value="4">Price, low to high</option>
+                                <option value="5">Price, high to low</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- Shop Top End -->
+
+                <!-- Shop content Start -->
+                <div class="shop-pro-content">
+                    <div class="shop-pro-inner">
+                        <div class="row">
+                            {% for i in product_obj %}
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-6 mb-6 pro-gl-content">
+                                <div class="ec-product-inner">
+                                    <div class="ec-pro-image-outer">
+                                        <div class="ec-pro-image">
+                                            <a href="{% url 'product:product_detail' i.slug %}" class="image">
+                                                <img class="main-image"
+                                                     src="{{ i.image.url }}" alt="Product"/>
+                                                <img class="hover-image"
+                                                     src="{{ i.image.url }}" alt="Product"/>
+                                            </a>
+                                            <span class="percentage">New</span>
+                                        </div>
+                                    </div>
+                                    <div class="ec-pro-content">
+                                        <h5 class="ec-pro-title"><a href="{% url 'product:product_detail' i.slug %}">{{ i.name }}</a></h5>
+                                        <div class="ec-pro-list-desc">{{ i.description|truncatechars:150 }}
+                                        </div>
+                                        <span class="ec-price">
+<!--                                                <span class="old-price">$27.00</span>-->
+                                                <span class="new-price">{{ i.price }} сум</span>
+                                            </span>
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- Ec Pagination Start -->
+
+                    <div class="ec-pro-pagination">
+                        <span onclick="showMoreProducts()">Yana ko'rsatish</span>
+
+                    </div>
+                    <!-- Ec Pagination End -->
+                </div>
+                <!--Shop content End -->
+            </div>
+            <!-- Sidebar Area Start -->
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+{% block script %}
 
 {% endblock %}
