@@ -27,8 +27,6 @@ def main_page(request):
             obj_list = paginator.page(paginator.num_pages)
 
     context = {
-        "collection": collection,
-        "all_collection_product": all_collection_product,
         "category": category.category.all()[1:] if category else None,
         "default_category": category.category.first() if category else None,
         "all_category": all_category,
