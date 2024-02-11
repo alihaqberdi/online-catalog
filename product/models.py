@@ -31,6 +31,13 @@ class Category(BaseModel):
         return self.name
 
 
+class ProductStatus(models.Model):
+    title = models.CharField(max_length=255, verbose_name=_("Title"))
+
+    def __str__(self):
+        return self.title
+
+
 class Product(BaseModel):
     name = models.CharField(max_length=255, verbose_name=_("Name"))
     slug = models.SlugField(max_length=255, unique=True, verbose_name=_("Slug"))
@@ -39,6 +46,8 @@ class Product(BaseModel):
     description = models.TextField(verbose_name=_("Description"))
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Price"))
     see_count = models.PositiveIntegerField(default=0, verbose_name=_("See Count"))
+    status = models.ForeignKey(ProductStatus, on_delete=models.SET_NULL, null=True, verbose_name=_("Status"),
+                               blank=True)
 
     def __str__(self):
         return self.name
