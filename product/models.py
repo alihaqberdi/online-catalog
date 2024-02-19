@@ -45,6 +45,9 @@ class Product(BaseModel):
     image = models.ImageField(upload_to="product", verbose_name=_("Image"))
     description = models.TextField(verbose_name=_("Description"))
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Price"))
+    discount_price = models.DecimalField(
+        max_digits=10, decimal_places=2, verbose_name=_("Discount Price"), null=True, blank=True
+    )
     see_count = models.PositiveIntegerField(default=0, verbose_name=_("See Count"))
     status = models.ForeignKey(ProductStatus, on_delete=models.SET_NULL, null=True, verbose_name=_("Status"),
                                blank=True)
