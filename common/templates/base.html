@@ -224,8 +224,9 @@
                 <!-- Ec Header Search Start -->
                 <div class="col">
                     <div class="header-search">
-                        <form class="ec-btn-group-form" action="#">
-                            <input class="form-control ec-search-bar" placeholder="Search products..." type="text">
+                        <form class="ec-btn-group-form" action="{% url 'common:search' %}">
+                            <input class="form-control ec-search-bar" placeholder="Search products..."
+                                       type="text" name="q" value="{{ q }}">
                             <button class="submit" type="submit"><i class="fi-rr-search"></i></button>
                         </form>
                     </div>
