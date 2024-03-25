@@ -78,5 +78,53 @@
         </div>
     </div>
 </section>
+   <!-- Related Product Start -->
+<section class="section ec-releted-product section-space-p">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="section-title">
+                        <h2 class="ec-bg-title">Related products</h2>
+                        <h2 class="ec-title">Related products</h2>
+                        <p class="sub-title">Browse The Collection of Top Products</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row margin-minus-b-30">
+                <!-- Related Product Content -->
+                {% for i in product_related %}
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 mb-6 pro-gl-content" >
+                    <div class="ec-product-inner" style="border: 2px solid;padding: 10px;box-shadow: 6px 4px 8px -2px;">
+                        <div class="ec-pro-image-outer">
+                            <div class="ec-pro-image">
+                                <a href="{% url 'product:product_detail' i.slug %}" class="image">
+                                    <img class="main-image"
+                                        src="{{ i.image.url }}" alt="Product" />
+                                    <img class="hover-image"
+                                        src="{{ i.image.url }}" alt="Product" />
+                                </a>
+                                <span class="percentage">{{ i.status.title }}</span>
+                            </div>
+                        </div>
+                        <div class="ec-pro-content">
+                                        <h5 class="">
+                                            <a href="{% url 'product:product_detail' i.slug %}" >{{ i.name }}</a>
+                                        </h5>
+                                        <div class="ec-pro-list-desc">{{ i.description|truncatechars:150 }}
+                                        </div>
+                                        {% if i.discount_price %}
+                                            <strike><span class="old-price">{{ i.discount_price }}  $</span></strike>
+                                        {% endif %}
+                                        <span class="ec-price">
+                                            <span class="new-price">{{ i.price }} $</span>
+                                        </span>
+                                    </div>
+                </div ><br>
+                {% endfor %}
+            </div>
+        </div>
+        </div>
+    </section>
+    <!-- Related Product end -->
 <!-- End Single product -->
 {% endblock %}

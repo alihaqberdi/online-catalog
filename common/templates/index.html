@@ -84,7 +84,7 @@
                         <div class="row">
                             {% for i in product_obj %}
                             <div class="col-lg-4 col-md-6 col-sm-6 col-6 mb-6 pro-gl-content">
-                                <div class="ec-product-inner">
+                                <div class="ec-product-inner" style="border: 2px solid;padding: 10px;box-shadow: 6px 4px 8px -2px;">
                                     <div class="ec-pro-image-outer">
                                         <div class="ec-pro-image">
                                             <a href="{% url 'product:product_detail' i.slug %}" class="image">
@@ -97,7 +97,9 @@
                                         </div>
                                     </div>
                                     <div class="ec-pro-content">
-                                        <h5 class="ec-pro-title"><a href="{% url 'product:product_detail' i.slug %}">{{ i.name }}</a></h5>
+                                        <h5 class="">
+                                            <a href="{% url 'product:product_detail' i.slug %}" >{{ i.name }}</a>
+                                        </h5>
                                         <div class="ec-pro-list-desc">{{ i.description|truncatechars:150 }}
                                         </div>
                                         {% if i.discount_price %}
@@ -106,7 +108,6 @@
                                         <span class="ec-price">
                                             <span class="new-price">{{ i.price }} $</span>
                                         </span>
-
                                     </div>
                                 </div>
                             </div>
