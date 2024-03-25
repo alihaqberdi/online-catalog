@@ -38,5 +38,8 @@ def product_list(request, slug):
 
 def product_detail(request, slug):
     product_obj = Product.objects.get(slug=slug)
-    context = {"product_obj": product_obj}
+    product_related = Product.objects.filter(category__in=product_obj.category.all()).exclude(slug=slug)
+    if len(product_related) >= 4:
+        product_related = product_related[:4]
+    context = {"product_obj": product_obj, "product_related": product_related}
     return render(request, "product-detail.html", context)
